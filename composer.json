@@ -22,6 +22,7 @@
     "drupal/core-dev": "10.1.x-dev",
     "drupal/core-project-message": "10.1.x-dev",
     "drupal/core-recommended": "10.1.x-dev",
+    "drupal/dubbot": "^1.0@dev",
     "drush/drush": "^11.4"
   },
   "conflict": {
