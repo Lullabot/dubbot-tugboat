@@ -1,0 +1,17 @@
+name: 'DubBot demo: Content'
+core_version_requirement: ^9 || ^10
+description: Imports the content for the DubBot demo.
+type: module
+version: VERSION
+package: 'DubBot (Experimental)'
+hidden: true
+dependencies:
+  - drupal:field
+  - drupal:file
+  - drupal:image
+  - drupal:node
+  - drupal:options
+  - drupal:path
+  - drupal:taxonomy
+  - drupal:text
+  - drupal:user
