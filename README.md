@@ -23,6 +23,10 @@ ddev composer update drupal/dubbot
 You might need to run ```ddev exec ./install.sh``` again, as we are not providing
 any upgrade paths yet.
 
+Set the DubBot embed key
+=====
+Visit `/admin/config/system/dubbot` and enter the DubBot embed key.
+
 For contributing:
 ====
 
