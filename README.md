@@ -1,5 +1,10 @@
 DubBot Drupal module Tugboat environment
-==
+===
+
+| [![build status](https://github.com/lullabot/dubbot-tugboat/actions/workflows/ci.yml/badge.svg)](https://github.com/lullabot/dubbot-tugboat/actions/workflows/ci.yml) |
+|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| [Online demo by Tugboat](https://main-mxoyu688ldpvli565yfnqliwqlmxpwt2.tugboatqa.com/)                                                                                |
+
 
 Setup
 ====
