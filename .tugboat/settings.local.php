@@ -14,3 +14,5 @@ $databases['default']['default'] = array (
 );
 
 $settings['config_sync_directory'] = '../config/sync';
+
+$config['dubbot.settings']['embed_key'] = getenv('DUBBOT_EMBED_KEY');
