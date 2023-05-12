@@ -7,9 +7,11 @@ dependencies:
   module:
     - comment
     - contact
+    - dubbot
     - filter
     - search
     - system
+    - toolbar
 _core:
   default_config_hash: 6WavjUYXIegP9AAg2zXGx54MWIVoomC3SZhNiqe-Dyk
 id: anonymous
@@ -19,6 +21,8 @@ is_admin: false
 permissions:
   - 'access comments'
   - 'access content'
+  - 'access dubbot report'
   - 'access site-wide contact form'
+  - 'access toolbar'
   - 'search content'
   - 'use text format restricted_html'
