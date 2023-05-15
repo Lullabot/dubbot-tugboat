@@ -1,0 +1,20 @@
+uuid: edd7e32b-b527-455a-bfeb-7625b4ea3134
+langcode: en
+status: true
+dependencies:
+  module:
+    - dubbot
+  theme:
+    - olivero
+id: olivero_dubbotreport
+theme: olivero
+region: social
+weight: -6
+provider: null
+plugin: dubbot_report
+settings:
+  id: dubbot_report
+  label: 'DubBot Report'
+  label_display: '0'
+  provider: dubbot
+visibility: {  }

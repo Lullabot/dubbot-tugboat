@@ -63,18 +63,23 @@
   <testsuites>
     <testsuite name="unit">
       <directory>web/modules/contrib/dubbot/tests/src/Unit</directory>
+      <directory>web/modules/contrib/dubbot/modules/*/tests/src/Unit</directory>
     </testsuite>
     <testsuite name="kernel">
       <directory>web/modules/contrib/dubbot/tests/src/Kernel</directory>
+      <directory>web/modules/contrib/dubbot/modules/*/tests/src/Kernel</directory>
     </testsuite>
     <testsuite name="functional">
       <directory>web/modules/contrib/dubbot/tests/src/Functional</directory>
+      <directory>web/modules/contrib/dubbot/modules/*/tests/src/Functional</directory>
     </testsuite>
     <testsuite name="functional-javascript">
       <directory>web/modules/contrib/dubbot/tests/src/FunctionalJavascript</directory>
+      <directory>web/modules/contrib/dubbot/modules/*/tests/src/FunctionalJavascript</directory>
     </testsuite>
     <testsuite name="all">
       <directory>web/modules/contrib/dubbot/tests/</directory>
+      <directory>web/modules/contrib/dubbot/modules/*/tests</directory>
     </testsuite>
   </testsuites>
   <listeners>
