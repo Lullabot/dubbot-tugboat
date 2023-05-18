@@ -33,6 +33,19 @@ jobs:
       - name: Check coding standards
         run: ddev exec phpcs --standard=web/core/phpcs.xml.dist web/modules/contrib/dubbot/
 
+  code-phpstan:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v1
+        with:
+          fetch-depth: 1
+      - name: Setup DDEV
+        uses: jonaseberle/github-action-setup-ddev@v1
+      - name: Install dependencies
+        run: ddev composer install
+      - name: Check coding standards
+        run: ddev exec php vendor/bin/phpstan.phar
+
   code-coverage:
     runs-on: ubuntu-latest
     steps:

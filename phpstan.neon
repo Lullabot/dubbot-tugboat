@@ -1,0 +1,10 @@
+parameters:
+    level: 3
+    paths:
+        - web/modules/contrib/dubbot
+    excludePaths:
+        - web/modules/contrib/dubbot/tests
+        - web/modules/contrib/dubbot/modules/dubbot_toolbar/tests
+    ignoreErrors:
+        # new static() is a best practice in Drupal, so we cannot fix that.
+        - "#^Unsafe usage of new static#"
