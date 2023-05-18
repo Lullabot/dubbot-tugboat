@@ -2601,7 +2601,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/dubbot.git",
-                "reference": "b42d6d879ddbed65f4a515a6ddd8666fc575d963"
+                "reference": "d4c0245b3841366fb715a8ccab781ae4c4f39b3a"
             },
             "require": {
                 "drupal/core": "^9 || ^10"
@@ -2613,7 +2613,7 @@
                 },
                 "drupal": {
                     "version": "1.0.x-dev",
-                    "datestamp": "1684155287",
+                    "datestamp": "1684409407",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Project has not opted into security advisory coverage!"
