@@ -26,3 +26,4 @@ permissions:
   - 'access toolbar'
   - 'search content'
   - 'use text format restricted_html'
+  - 'view the administration theme'
