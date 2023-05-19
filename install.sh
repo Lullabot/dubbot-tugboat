@@ -7,3 +7,5 @@ drush config-import --yes
 
 # For restoring shortcuts.
 drush php-eval 'include_once "core/profiles/standard/standard.install"; standard_install();'
+
+drush en dubbot_default_content --yes

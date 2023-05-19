@@ -1,0 +1,15 @@
+uuid: 40450a7e-cfb2-4be6-82b0-c042bc363481
+langcode: en
+status: true
+dependencies: {  }
+id: dubbot_overview
+title: 'DubBot Overview'
+route_name: dubbot.overview
+route_parameters: {  }
+options: {  }
+expanded: false
+menu_name: main
+enabled: true
+parent: ''
+weight: 20
+description: ''
