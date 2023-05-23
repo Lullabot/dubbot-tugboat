@@ -17,4 +17,5 @@ settings:
   label: 'DubBot Report'
   label_display: '0'
   provider: dubbot
+  link_color: '#025479'
 visibility: {  }
