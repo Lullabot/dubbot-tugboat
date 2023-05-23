@@ -8,3 +8,4 @@ parameters:
     ignoreErrors:
         # new static() is a best practice in Drupal, so we cannot fix that.
         - "#^Unsafe usage of new static#"
+        #- '#Call to an undefined method [a-zA-Z0-9\\_]+ClientInterface::(get|post)\(\)#'
