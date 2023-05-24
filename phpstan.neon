@@ -8,4 +8,5 @@ parameters:
     ignoreErrors:
         # new static() is a best practice in Drupal, so we cannot fix that.
         - "#^Unsafe usage of new static#"
-        #- '#Call to an undefined method [a-zA-Z0-9\\_]+ClientInterface::(get|post)\(\)#'
+        # ClientInterface::request interface is not consistent between D9 & D10. Need to use get & post methods.
+        - '#Call to an undefined method [a-zA-Z0-9\\_]+ClientInterface::(get|post)\(\)#'
