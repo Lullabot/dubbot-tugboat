@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "211b3d113c0fc77f40a4fe38253d8984",
+    "content-hash": "f49a03bf9a836c730a6b07ecdce5cb41",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -2597,29 +2597,26 @@
         },
         {
             "name": "drupal/dubbot",
-            "version": "1.0.0-beta1",
+            "version": "dev-1.0.x",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/dubbot.git",
-                "reference": "1.0.0-beta1"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/dubbot-1.0.0-beta1.zip",
-                "reference": "1.0.0-beta1",
-                "shasum": "0a99dc85a1cbd520200333ae1d852a566e776db3"
+                "reference": "e0631a030edaf5771cbbd47bbaf47ae9f349d985"
             },
             "require": {
                 "drupal/core": "^9 || ^10"
             },
             "type": "drupal-module",
             "extra": {
+                "branch-alias": {
+                    "dev-1.0.x": "1.0.x-dev"
+                },
                 "drupal": {
-                    "version": "1.0.0-beta1",
-                    "datestamp": "1685002097",
+                    "version": "1.0.0-beta2+1-dev",
+                    "datestamp": "1685599963",
                     "security-coverage": {
                         "status": "not-covered",
-                        "message": "Beta releases are not covered by Drupal security advisories."
+                        "message": "Dev releases are not covered by Drupal security advisories."
                     }
                 }
             },
@@ -2635,6 +2632,10 @@
                 {
                     "name": "plopesc",
                     "homepage": "https://www.drupal.org/user/282415"
+                },
+                {
+                    "name": "sylturner",
+                    "homepage": "https://www.drupal.org/user/3753133"
                 }
             ],
             "description": "DubBot provides automated tests for website accessibility, broken links, spelling, and customizable web governance rules.",

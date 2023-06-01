@@ -22,7 +22,7 @@
     "drupal/core-dev": "10.1.x-dev",
     "drupal/core-project-message": "10.1.x-dev",
     "drupal/core-recommended": "10.1.x-dev",
-    "drupal/dubbot": "^1.0@dev",
+    "drupal/dubbot": "1.0.x-dev",
     "drupal/menu_link_config": "^1.0@alpha",
     "drush/drush": "^11.4",
     "phpstan/phpstan-deprecation-rules": "^1.1"
