@@ -2601,7 +2601,7 @@
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/dubbot.git",
-                "reference": "e0631a030edaf5771cbbd47bbaf47ae9f349d985"
+                "reference": "2e7267a436c07e1864aa84cac8f3ec6199ca0982"
             },
             "require": {
                 "drupal/core": "^9 || ^10"
@@ -2612,8 +2612,8 @@
                     "dev-1.0.x": "1.0.x-dev"
                 },
                 "drupal": {
-                    "version": "1.0.0-beta2+1-dev",
-                    "datestamp": "1685599963",
+                    "version": "1.0.0+2-dev",
+                    "datestamp": "1685686477",
                     "security-coverage": {
                         "status": "not-covered",
                         "message": "Dev releases are not covered by Drupal security advisories."
