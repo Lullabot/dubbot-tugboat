@@ -1,6 +1,6 @@
 services:
   php:
-    image: tugboatqa/php:8.1-apache
+    image: tugboatqa/php:8.2-apache
     default: true
     # Wait until the mysql service is done building
     depends: mysql
@@ -62,4 +62,4 @@ services:
         - 'curl -H "Host: ${TUGBOAT_DEFAULT_SERVICE_URL_HOST}" http://localhost > /dev/null 2>&1'
 
   mysql:
-    image: tugboatqa/mariadb:10.3
+    image: tugboatqa/mariadb:10.4
