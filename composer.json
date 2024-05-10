@@ -16,16 +16,15 @@
     }
   ],
   "require": {
-    "composer/installers": "^2.0",
-    "cweagans/composer-patches": "^1.7",
-    "drupal/core-composer-scaffold": "10.1.x-dev",
-    "drupal/core-dev": "10.1.x-dev",
-    "drupal/core-project-message": "10.1.x-dev",
-    "drupal/core-recommended": "10.1.x-dev",
+    "composer/installers": "^2.2",
+    "cweagans/composer-patches": "^1.7.3",
+    "drupal/core-composer-scaffold": "10.2.6",
+    "drupal/core-project-message": "10.2.6",
+    "drupal/core-recommended": "10.2.6",
     "drupal/dubbot": "1.0.x-dev",
     "drupal/menu_link_config": "^1.0@alpha",
-    "drush/drush": "^11.4",
-    "phpstan/phpstan-deprecation-rules": "^1.1"
+    "drush/drush": "^12.5.2",
+    "phpstan/phpstan-deprecation-rules": "^1.1.4"
   },
   "conflict": {
     "drupal/drupal": "*"
@@ -38,7 +37,8 @@
       "drupal/core-project-message": true,
       "phpstan/extension-installer": true,
       "dealerdirect/phpcodesniffer-composer-installer": true,
-      "cweagans/composer-patches": true
+      "cweagans/composer-patches": true,
+      "php-http/discovery": true
     },
     "sort-packages": true
   },
@@ -82,5 +82,8 @@
         "Provide a block for running cron from a dashboard": "https://www.drupal.org/files/issues/2022-12-17/3327827-block-cron.patch"
       }
     }
+  },
+  "require-dev": {
+    "drupal/core-dev": "^10.2.6"
   }
 }
