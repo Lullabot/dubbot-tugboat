@@ -23,6 +23,7 @@
     "drupal/core-vendor-hardening": "^11.0",
     "drupal/dubbot": "^1.0",
     "drupal/menu_link_config": "^1.0@alpha",
+    "drupal/tour": "^2.0",
     "drush/drush": "^13",
     "mglaman/composer-drupal-lenient": "^1.0",
     "phpstan/phpstan-deprecation-rules": "^1.1.4"
