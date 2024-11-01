@@ -62,4 +62,4 @@ services:
         - 'curl -H "Host: ${TUGBOAT_DEFAULT_SERVICE_URL_HOST}" http://localhost > /dev/null 2>&1'
 
   mysql:
-    image: tugboatqa/mariadb:10.4
+    image: tugboatqa/mariadb:10.6
