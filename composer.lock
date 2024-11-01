@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2fcd21a0bd705731b319a554d1916418",
+    "content-hash": "5c7ac8a7f3a3077854daf7c247e1ad49",
     "packages": [
         {
             "name": "asm89/stack-cors",
@@ -1477,26 +1477,26 @@
         },
         {
             "name": "drupal/dubbot",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://git.drupalcode.org/project/dubbot.git",
-                "reference": "1.0.0"
+                "reference": "1.0.1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://ftp.drupal.org/files/projects/dubbot-1.0.0.zip",
-                "reference": "1.0.0",
-                "shasum": "ed877c61a785c62a3e2bc2b7eedd22141e18f9a6"
+                "url": "https://ftp.drupal.org/files/projects/dubbot-1.0.1.zip",
+                "reference": "1.0.1",
+                "shasum": "e69f4a7fb7a53e43a851f9d8cd3955e76f543fbc"
             },
             "require": {
-                "drupal/core": "^8 || ^9 || ^10 || ^11 || ^12"
+                "drupal/core": "^9 || ^10 || ^11"
             },
             "type": "drupal-module",
             "extra": {
                 "drupal": {
-                    "version": "1.0.0",
-                    "datestamp": "1685691402",
+                    "version": "1.0.1",
+                    "datestamp": "1730481805",
                     "security-coverage": {
                         "status": "covered",
                         "message": "Covered by Drupal's security advisory policy"
@@ -1515,6 +1515,10 @@
                 {
                     "name": "davidburns",
                     "homepage": "https://www.drupal.org/user/72958"
+                },
+                {
+                    "name": "markie",
+                    "homepage": "https://www.drupal.org/user/206687"
                 },
                 {
                     "name": "mvaughan-dubbot",

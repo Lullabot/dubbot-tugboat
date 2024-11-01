@@ -93,13 +93,10 @@
         "Drupal 11 update (https://dgo.to/3431957)": "patches/drupal/menu_link_config/3431957-drupal-11.patch",
         "Fatal error after upgrading to Drupal 10.2 (https://dgo.to/3410136)" : "patches/drupal/menu_link_config/3410136-fatal-error-after-upgrading-11.patch",
         "Dynamic property declaration (https://dgo.to/3416766)": "patches/drupal/menu_link_config/dynamic-property-declaration-3416766-2.patch"
-      },
-      "drupal/dubbot": {
-        "Drupal 11 update (https://dgo.to/3429983)": "patches/drupal/dubbot/3429983-drupal-11.patch"
       }
     },
     "drupal-lenient": {
-      "allowed-list": ["drupal/dubbot", "drupal/menu_link_config"]
+      "allowed-list": ["drupal/menu_link_config"]
     }
   }
 }
