@@ -1,0 +1,37 @@
+diff --git a/dubbot.info.yml b/dubbot.info.yml
+index ed5f70f7106118e718b0e5400dac215722d1918b..237ebb1dcff77b3ec52d0d414f413c87e840bbcf 100644
+--- a/dubbot.info.yml
++++ b/dubbot.info.yml
+@@ -2,5 +2,5 @@ name: DubBot
+ type: module
+ description: DubBot provides automated tests for website accessibility, broken links, spelling, and customizable web governance rules.
+ package: User Interface
+-core_version_requirement: ^9 || ^10
++core_version_requirement: ^9 || ^10 || ^11
+ configure: dubbot.settings
+diff --git a/modules/dubbot_toolbar/dubbot_toolbar.info.yml b/modules/dubbot_toolbar/dubbot_toolbar.info.yml
+index 67660af96175b96047b39f55b31312a709c5e56b..e92e50364c5fa48fa693a1e16143bfeaf1744856 100644
+--- a/modules/dubbot_toolbar/dubbot_toolbar.info.yml
++++ b/modules/dubbot_toolbar/dubbot_toolbar.info.yml
+@@ -2,7 +2,7 @@ name: DubBot Toolbar
+ type: module
+ description: Provides toolbar integration for DubBot reports.
+ package: User Interface
+-core_version_requirement: ^9 || ^10
++core_version_requirement: ^9 || ^10 || ^11
+ dependencies:
+   - drupal:toolbar
+   - dubbot:dubbot
+diff --git a/tests/src/Unit/DubBotClientTest.php b/tests/src/Unit/DubBotClientTest.php
+index ab5f810bbd6417bd4fb1af58026e62100325d375..24bdd2d39aa1c4f85f6d637b6f8c8d0f9d4bd6c4 100644
+--- a/tests/src/Unit/DubBotClientTest.php
++++ b/tests/src/Unit/DubBotClientTest.php
+@@ -119,7 +119,7 @@ class DubBotClientTest extends UnitTestCase {
+   /**
+    * Data provider for testIsEnabled().
+    */
+-  public function dataProviderTestIsEnabled(): array {
++  public static function dataProviderTestIsEnabled(): array {
+     return [
+       [
+         [FALSE],

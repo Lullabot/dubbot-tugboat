@@ -18,11 +18,11 @@
   "require": {
     "composer/installers": "^2.2",
     "cweagans/composer-patches": "^1.7.3",
-    "drupal/core-composer-scaffold": "10.2.6",
-    "drupal/core-project-message": "10.2.6",
-    "drupal/core-recommended": "10.2.6",
+    "drupal/core-composer-scaffold": "^10.3",
+    "drupal/core-project-message": "^10.3",
+    "drupal/core-recommended": "^10.3",
     "drupal/dubbot": "1.0.x-dev",
-    "drupal/menu_link_config": "^1.0@alpha",
+    "drupal/menu_link_config": "@alpha",
     "drush/drush": "^12.5.2",
     "phpstan/phpstan-deprecation-rules": "^1.1.4"
   },
@@ -38,7 +38,8 @@
       "phpstan/extension-installer": true,
       "dealerdirect/phpcodesniffer-composer-installer": true,
       "cweagans/composer-patches": true,
-      "php-http/discovery": true
+      "php-http/discovery": true,
+      "tbachert/spi": true
     },
     "sort-packages": true
   },
@@ -82,11 +83,16 @@
         "Provide a block for running cron from a dashboard": "https://www.drupal.org/files/issues/2022-12-17/3327827-block-cron.patch"
       },
       "drupal/menu_link_config": {
-        "Fatal error after upgrading to Drupal 10.2" : "https://www.drupal.org/files/issues/2024-01-11/3410136-fatal-error-after-upgrading-11.patch"
+        "Drupal 11 update (https://dgo.to/3431957)": "patches/drupal/menu_link_config/3431957-drupal-11.patch",
+        "Fatal error after upgrading to Drupal 10.2 (https://dgo.to/3410136)" : "patches/drupal/menu_link_config/3410136-fatal-error-after-upgrading-11.patch"
+      },
+      "drupal/dubbot": {
+        "Drupal 11 update (https://dgo.to/3429983)": "patches/drupal/dubbot/3429983-drupal-11.patch"
       }
     }
   },
   "require-dev": {
-    "drupal/core-dev": "^10.2.6"
+    "drupal/core-dev": "^10.3",
+    "drupal/upgrade_status": "^4.3"
   }
 }

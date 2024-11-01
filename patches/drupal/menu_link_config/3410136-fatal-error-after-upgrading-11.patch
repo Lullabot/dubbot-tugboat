@@ -1,0 +1,160 @@
+diff --git a/src/Entity/MenuLinkConfig.php b/src/Entity/MenuLinkConfig.php
+index e208362..dce83f3 100644
+--- a/src/Entity/MenuLinkConfig.php
++++ b/src/Entity/MenuLinkConfig.php
+@@ -202,16 +202,15 @@ class MenuLinkConfig extends ConfigEntityBase implements MenuLinkConfigInterface
+     /** @var \Drupal\Core\Menu\MenuLinkManagerInterface $menu_link_manager */
+     $menu_link_manager = \Drupal::service('plugin.manager.menu.link');
+ 
+-    /** @var \Drupal\menu_link_config\Entity\MenuLinkConfig $menu_link */
++    /** @var \Drupal\menu_link_config\MenuLinkConfigInterface $menu_link */
+     foreach ($entities as $menu_link) {
+-      /** @var \Drupal\menu_link_content\Entity\MenuLinkContent $menu_link */
+       $menu_link_manager->removeDefinition($menu_link->getPluginId(), FALSE);
+ 
+       // Children get re-attached to the menu link's parent.
+       $parent_plugin_id = $menu_link->getParent();
+       $children = $storage->loadByProperties(['parent' => $menu_link->getPluginId()]);
+       foreach ($children as $child) {
+-        /** @var \Drupal\menu_link_content\Entity\MenuLinkContent $child */
++        /** @var \Drupal\menu_link_config\MenuLinkConfigInterface $child */
+         $child->set('parent', $parent_plugin_id)->save();
+       }
+     }
+diff --git a/src/Plugin/Menu/MenuLinkConfig.php b/src/Plugin/Menu/MenuLinkConfig.php
+index f77afa6..4308e9a 100644
+--- a/src/Plugin/Menu/MenuLinkConfig.php
++++ b/src/Plugin/Menu/MenuLinkConfig.php
+@@ -7,16 +7,24 @@ use Drupal\config_translation\ConfigMapperManagerInterface;
+ use Drupal\Core\Entity\EntityTypeManagerInterface;
+ use Drupal\Core\Language\LanguageManagerInterface;
+ use Drupal\Core\Entity\EntityRepositoryInterface;
+-use Drupal\menu_link_content\Plugin\Menu\MenuLinkContent;
++use Drupal\Core\Menu\MenuLinkBase;
++use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
++use Drupal\menu_link_config\MenuLinkConfigInterface;
+ use Symfony\Component\DependencyInjection\ContainerInterface;
+ 
+ /**
+  * Provides a menu link plugin based upon storage in config.
+- *
+- * @todo Instead of extending MenuLinkContent, there should be a generic base
+- *   class for the generic entity handling.
+  */
+-class MenuLinkConfig extends MenuLinkContent {
++class MenuLinkConfig extends MenuLinkBase implements ContainerFactoryPluginInterface {
++
++  /**
++   * Entities IDs to load.
++   *
++   * It is an array of entity IDs keyed by entity IDs.
++   *
++   * @var array
++   */
++  protected static $entityIdsToLoad = [];
+ 
+   /**
+    * The config menu link entity connected to this plugin instance.
+@@ -25,6 +33,27 @@ class MenuLinkConfig extends MenuLinkContent {
+    */
+   protected $entity;
+ 
++  /**
++   * The entity type manager.
++   *
++   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
++   */
++  protected $entityTypeManager;
++
++  /**
++   * The language manager.
++   *
++   * @var \Drupal\Core\Language\LanguageManagerInterface
++   */
++  protected $languageManager;
++
++  /**
++   * The entity repository.
++   *
++   * @var \Drupal\Core\Entity\EntityRepositoryInterface
++   */
++  protected $entityRepository;
++
+   /**
+    * The config translation mapper manager.
+    *
+@@ -44,17 +73,28 @@ class MenuLinkConfig extends MenuLinkContent {
+    *   The plugin_id for the plugin instance.
+    * @param mixed $plugin_definition
+    *   The plugin implementation definition.
+-   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_manager
++   * @param \Drupal\Core\Entity\EntityTypeManagerInterface $entity_type_manager
+    *   The entity manager.
+    * @param \Drupal\Core\Language\LanguageManagerInterface $language_manager
+    *   The language manager.
+    * @param \Drupal\Core\Entity\EntityRepositoryInterface $entity_repository
+    *   The entity repository.
+-   * @param \Drupal\config_translation\ConfigMapperManagerInterface $mapper_manager
++   * @param \Drupal\config_translation\ConfigMapperManagerInterface|null $mapper_manager
+    *   The config translation mapper manager.
+    */
+-  public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entity_manager, LanguageManagerInterface $language_manager, EntityRepositoryInterface $entity_repository, ConfigMapperManagerInterface $mapper_manager = NULL) {
+-    parent::__construct($configuration, $plugin_id, $plugin_definition, $entity_manager, $language_manager, $entity_repository);
++  public function __construct(array $configuration, $plugin_id, $plugin_definition, EntityTypeManagerInterface $entity_type_manager, LanguageManagerInterface $language_manager, EntityRepositoryInterface $entity_repository, ConfigMapperManagerInterface $mapper_manager = NULL) {
++    parent::__construct($configuration, $plugin_id, $plugin_definition);
++
++    if (!empty($this->pluginDefinition['metadata']['entity_id'])) {
++      $entity_id = $this->pluginDefinition['metadata']['entity_id'];
++      // Builds a list of entity IDs to take advantage of the more efficient
++      // EntityStorageInterface::loadMultiple() in getEntity() at render time.
++      static::$entityIdsToLoad[$entity_id] = $entity_id;
++    }
++
++    $this->entityTypeManager = $entity_type_manager;
++    $this->languageManager = $language_manager;
++    $this->entityRepository = $entity_repository;
+ 
+     $this->mapperManager = $mapper_manager;
+   }
+@@ -84,7 +124,7 @@ class MenuLinkConfig extends MenuLinkContent {
+    * @throws \Drupal\Component\Plugin\Exception\PluginException
+    *   If the entity ID and UUID are both invalid or missing.
+    */
+-  public function getEntity() {
++  public function getEntity(): MenuLinkConfigInterface {
+     if (empty($this->entity)) {
+       $entity = NULL;
+       $storage = $this->entityTypeManager->getStorage('menu_link_config');
+@@ -112,6 +152,32 @@ class MenuLinkConfig extends MenuLinkContent {
+     return $this->entity;
+   }
+ 
++  /**
++   * {@inheritdoc}
++   */
++  public function getTitle() {
++    // We only need to get the title from the actual entity if it may be a
++    // translation based on the current language context. This can only happen
++    // if the site is configured to be multilingual.
++    if ($this->languageManager->isMultilingual()) {
++      return $this->getEntity()->getTitle();
++    }
++    return $this->pluginDefinition['title'];
++  }
++
++  /**
++   * {@inheritdoc}
++   */
++  public function getDescription() {
++    // We only need to get the description from the actual entity if it may be a
++    // translation based on the current language context. This can only happen
++    // if the site is configured to be multilingual.
++    if ($this->languageManager->isMultilingual()) {
++      return $this->getEntity()->getDescription();
++    }
++    return $this->pluginDefinition['description'];
++  }
++
+   /**
+    * {@inheritdoc}
+    */
