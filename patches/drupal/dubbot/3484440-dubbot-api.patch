@@ -1,0 +1,27 @@
+diff --git a/dubbot.libraries.yml b/dubbot.libraries.yml
+index 63d8bebe6d2378a4a0234ab77a9f154c56b1d3af..d456d5a4e900ebe516d0437db2f7761988abece5 100644
+--- a/dubbot.libraries.yml
++++ b/dubbot.libraries.yml
+@@ -4,6 +4,7 @@ block:
+       css/block.css: {}
+   js:
+     js/block.js: { }
++    https://api.dubbot.com/embeds/highlight.js: { external: true }
+   dependencies:
+     - core/drupal
+     - core/once
+diff --git a/js/block.js b/js/block.js
+index 996ba2ff01abb5629e098ccadb50f69187d633e6..167341e68beedfdefa8c4de6640c8280df55ae3e 100644
+--- a/js/block.js
++++ b/js/block.js
+@@ -48,6 +48,10 @@
+       dubbotBlocks.forEach((block) => {
+         initBlockColor(block);
+       });
++
++      const api = new DubbotHighlight('#page', dubbotApiUrl);
++      api.init();
++
+     },
+   };
+ })(Drupal, drupalSettings, once);

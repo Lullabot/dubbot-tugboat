@@ -93,6 +93,9 @@
         "Drupal 11 update (https://dgo.to/3431957)": "patches/drupal/menu_link_config/3431957-drupal-11.patch",
         "Fatal error after upgrading to Drupal 10.2 (https://dgo.to/3410136)" : "patches/drupal/menu_link_config/3410136-fatal-error-after-upgrading-11.patch",
         "Dynamic property declaration (https://dgo.to/3416766)": "patches/drupal/menu_link_config/dynamic-property-declaration-3416766-2.patch"
+      },
+      "drupal/dubbot": {
+        "Allow DubBot iframe to hightlight Drupal Markup (https://dgo.to/3484440)": "patches/drupal/dubbot/3484440-dubbot-api.patch"
       }
     },
     "drupal-lenient": {
