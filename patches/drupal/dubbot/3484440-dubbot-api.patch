@@ -11,7 +11,7 @@ index 63d8bebe6d2378a4a0234ab77a9f154c56b1d3af..c3fdbbe0dae757323eab08589b649276
      - core/drupal
      - core/once
 diff --git a/js/block.js b/js/block.js
-index 996ba2ff01abb5629e098ccadb50f69187d633e6..167341e68beedfdefa8c4de6640c8280df55ae3e 100644
+index 996ba2ff01abb5629e098ccadb50f69187d633e6..b28df9be96135b7abca49a5b78e1fcdd0e2b2fd5 100644
 --- a/js/block.js
 +++ b/js/block.js
 @@ -48,6 +48,10 @@
@@ -19,7 +19,7 @@ index 996ba2ff01abb5629e098ccadb50f69187d633e6..167341e68beedfdefa8c4de6640c8280
          initBlockColor(block);
        });
 +
-+      const api = new DubbotHighlight('#page', dubbotApiUrl);
++      const api = new DubbotHighlight('#page', 'https://api.dubbot.com');
 +      api.init();
 +
      },
