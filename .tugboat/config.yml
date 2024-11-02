@@ -47,7 +47,6 @@ services:
         - drush user:role:add administrator admin
         - drush config-set system.site uuid 28350631-bb36-48a0-a913-6d4998c3c9db --yes
         - drush entity-delete shortcut_set --yes
-        - drush en dubbot_default_content --yes
 
       # Commands that build the site. This is where you would add things
       # like feature reverts or any other drush commands required to
@@ -56,9 +55,8 @@ services:
       # and update steps, because the results of those are inherited
       # from the base preview.
       build:
-        # Any composer updates?
-        - composer install --optimize-autoloader
-        - drush deploy
+        - drush config-import --yes
+        - drush en dubbot_default_content --yes
 
         # Warm the caches to get a quicker first page load.
         - 'curl -H "Host: ${TUGBOAT_DEFAULT_SERVICE_URL_HOST}" http://localhost > /dev/null 2>&1'
