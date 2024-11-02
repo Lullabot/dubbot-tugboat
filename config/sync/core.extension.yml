@@ -14,7 +14,6 @@ module:
   datetime: 0
   dblog: 0
   dubbot: 0
-  dubbot_default_content: 0
   dubbot_toolbar: 0
   dynamic_page_cache: 0
   editor: 0
