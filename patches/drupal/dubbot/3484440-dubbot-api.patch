@@ -43,7 +43,7 @@ index 63d8bebe6d2378a4a0234ab77a9f154c56b1d3af..c3fdbbe0dae757323eab08589b649276
      - core/drupal
      - core/once
 diff --git a/js/block.js b/js/block.js
-index 996ba2ff01abb5629e098ccadb50f69187d633e6..c0b6ffb3471c80b7852c86216ba6ea549b94f034 100644
+index 996ba2ff01abb5629e098ccadb50f69187d633e6..bb14b52bc7eef9c68f97f7ca4be326226163d390 100644
 --- a/js/block.js
 +++ b/js/block.js
 @@ -48,6 +48,11 @@
@@ -51,7 +51,7 @@ index 996ba2ff01abb5629e098ccadb50f69187d633e6..c0b6ffb3471c80b7852c86216ba6ea54
          initBlockColor(block);
        });
 +
-+      const dubbotApiUrl = settings.dubbot.iframe.api_url;
++      const dubbotApiUrl = settings.dubbot.block.api_url;
 +      const api = new DubbotHighlight('#page', dubbotApiUrl);
 +      api.init();
 +
@@ -1179,19 +1179,6 @@ index 0000000000000000000000000000000000000000..63eab2a5cdbff9abe7bcd362077cb412
 +  return Mark;
 +
 +})));
-diff --git a/src/Controller/DubBotReportController.php b/src/Controller/DubBotReportController.php
-index cced24e958a0ea833c72f6e07dd76ce734752747..561dfa17d8f3934740e9bbcb73222d4899d5fc2f 100644
---- a/src/Controller/DubBotReportController.php
-+++ b/src/Controller/DubBotReportController.php
-@@ -90,6 +90,8 @@ class DubBotReportController extends ControllerBase {
-       ],
-     ];
-
-+    $build['#attached']['drupalSettings']['dubbot']['iframe']['api_url'] = $this->config('dubbot.settings')->get('api_url');
-+
-     return $build;
-   }
-
 diff --git a/src/Form/SettingsForm.php b/src/Form/SettingsForm.php
 index 7b18cb9cd0c51e6b8f77da47add9b411ce3ba966..b1dff7292f43ba54422c097bb204e4bdece23f37 100644
 --- a/src/Form/SettingsForm.php
@@ -1217,4 +1204,75 @@ index 7b18cb9cd0c51e6b8f77da47add9b411ce3ba966..b1dff7292f43ba54422c097bb204e4bd
 +      ->set('api_url', $form_state->getValue('api_url'))
        ->set('dialog_renderer', $form_state->getValue('dialog_renderer'))
        ->save();
- 
+
+diff --git a/src/Plugin/Block/DubBotReportBlock.php b/src/Plugin/Block/DubBotReportBlock.php
+index c5a886c27fb873bf6662d6f6554b3a10a85746dc..5ae29700f3a26953cbdf3761d6aa0c6d4a89837b 100644
+--- a/src/Plugin/Block/DubBotReportBlock.php
++++ b/src/Plugin/Block/DubBotReportBlock.php
+@@ -8,6 +8,7 @@ use Drupal\Core\Access\AccessResult;
+ use Drupal\Core\Access\AccessResultInterface;
+ use Drupal\Core\Block\BlockBase;
+ use Drupal\Core\Cache\Cache;
++use Drupal\Core\Config\ImmutableConfig;
+ use Drupal\Core\Form\FormStateInterface;
+ use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
+ use Drupal\Core\Routing\RouteMatchInterface;
+@@ -48,6 +49,13 @@ class DubBotReportBlock extends BlockBase implements ContainerFactoryPluginInter
+    */
+   protected $linkGenerator;
+
++  /**
++   * Dubbot Settings.
++   *
++   * @var \Drupal\Core\Config\ImmutableConfig
++   */
++  protected $dubbotSettings;
++
+   /**
+    * Constructs a new DubBotReportBlock instance.
+    *
+@@ -66,12 +74,15 @@ class DubBotReportBlock extends BlockBase implements ContainerFactoryPluginInter
+    *   The current route match.
+    * @param \Drupal\dubbot\LinkGeneratorInterface $link_generator
+    *   The DubBot link generator.
++   * @param \Drupal\Core\Config\ImmutableConfig $dubbot_settings
++   *   The Dubbot settings.
+    */
+-  public function __construct(array $configuration, $plugin_id, $plugin_definition, AccessManagerInterface $access_manager, RouteMatchInterface $route_match, LinkGeneratorInterface $link_generator) {
++  public function __construct(array $configuration, $plugin_id, $plugin_definition, AccessManagerInterface $access_manager, RouteMatchInterface $route_match, LinkGeneratorInterface $link_generator, ImmutableConfig $dubbot_settings) {
+     parent::__construct($configuration, $plugin_id, $plugin_definition);
+     $this->accessManager = $access_manager;
+     $this->routeMatch = $route_match;
+     $this->linkGenerator = $link_generator;
++    $this->dubbotSettings = $dubbot_settings;
+   }
+
+   /**
+@@ -84,7 +95,8 @@ class DubBotReportBlock extends BlockBase implements ContainerFactoryPluginInter
+       $plugin_definition,
+       $container->get('access_manager'),
+       $container->get('current_route_match'),
+-      $container->get('dubbot.link_generator')
++      $container->get('dubbot.link_generator'),
++      $container->get('config.factory')->get('dubbot.settings')
+     );
+   }
+
+@@ -173,8 +185,17 @@ class DubBotReportBlock extends BlockBase implements ContainerFactoryPluginInter
+       ],
+       '#attached' => [
+         'library' => ['dubbot/block'],
++        'drupalSettings' => [
++          'dubbot' => [
++            'block' => [
++              'link_color' => $this->configuration['link_color'],
++              'api_url' => $this->dubbotSettings->get('api_url'),
++            ],
++          ],
++        ],
+       ],
+     ];
++
+   }
+
+   /**
