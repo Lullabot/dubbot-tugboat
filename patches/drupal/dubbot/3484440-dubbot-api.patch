@@ -31,14 +31,14 @@ index 53a1eb71e53913dfe483cfe8ccc4dbdd2a9aeb59..a2d2fee0309251cc867ff8aa959d1445
        type: string
        label: 'Color code'
 diff --git a/dubbot.libraries.yml b/dubbot.libraries.yml
-index 63d8bebe6d2378a4a0234ab77a9f154c56b1d3af..c3fdbbe0dae757323eab08589b6492764c88b91f 100644
+index 63d8bebe6d2378a4a0234ab77a9f154c56b1d3af..d456d5a4e900ebe516d0437db2f7761988abece5 100644
 --- a/dubbot.libraries.yml
 +++ b/dubbot.libraries.yml
 @@ -4,6 +4,7 @@ block:
        css/block.css: {}
    js:
      js/block.js: { }
-+    js/highlight.js: { }
++    https://api.dubbot.com/embeds/highlight.js: { external: true }
    dependencies:
      - core/drupal
      - core/once
