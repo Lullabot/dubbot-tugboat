@@ -21,7 +21,7 @@
     "drupal/core-composer-scaffold": "^11",
     "drupal/core-recommended": "^11",
     "drupal/core-vendor-hardening": "^11.0",
-    "drupal/dubbot": "^1.0",
+    "drupal/dubbot": "2.x-dev",
     "drupal/menu_link_config": "^1.0@alpha",
     "drupal/tour": "^2.0",
     "drush/drush": "^13",
@@ -95,7 +95,7 @@
         "Dynamic property declaration (https://dgo.to/3416766)": "patches/drupal/menu_link_config/dynamic-property-declaration-3416766-2.patch"
       },
       "drupal/dubbot": {
-        "Allow DubBot iframe to hightlight Drupal Markup (https://dgo.to/3484440)": "patches/drupal/dubbot/3484440-dubbot-api.patch"
+        "Permissions to limit which reports appear (https://dgo.to/3484445)": "patches/drupal/dubbot/3484445-permissions.patch"
       }
     },
     "drupal-lenient": {
