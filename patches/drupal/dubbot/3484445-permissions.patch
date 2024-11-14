@@ -31,19 +31,19 @@ index 2ac4503798b52e1929e50bf65b82ddacdd64539a..f9ef8ad1e944eeecb0bc9bb2f59080a6
 +  title: 'View Dubbot Broken Links Tab'
 +  description: 'Allows user to view the Broken Links tab.'
 diff --git a/src/Client.php b/src/Client.php
-index 5360e18809580b543684879c0153d03fc9d8879b..c3175fd35e4e56c57b8fa1619337d58b7fffd074 100644
+index 5360e18809580b543684879c0153d03fc9d8879b..317d49feb2f2361c35e8deed2f770ba265aa5ff3 100644
 --- a/src/Client.php
 +++ b/src/Client.php
 @@ -143,6 +143,27 @@ class Client implements ClientInterface {
- 
+
      $url = static::API_BASE_URL . UrlHelper::encodePath(strtr($path, $replacements));
- 
+
 +    // Check tab permsissions.
 +    $perms = [
-+      'practices' => 'view dubbot practices tab',
-+      'governace' => 'view dubbot governance tab',
-+      'accessibility' => 'view dubbot accessibility tab',
-+      'spellcheck' => 'view dubbot spellcheck tab',
++      'best-practices' => 'view dubbot practices tab',
++      'web-governace' => 'view dubbot governance tab',
++      'a11y' => 'view dubbot accessibility tab',
++      'spelling' => 'view dubbot spellcheck tab',
 +      'seo' => 'view dubbot seo tab',
 +      'links' => 'view dubbot links tab',
 +    ];
