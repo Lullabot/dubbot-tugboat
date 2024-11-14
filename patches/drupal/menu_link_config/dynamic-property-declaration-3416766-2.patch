@@ -1,0 +1,59 @@
+diff --git a/src/Plugin/Derivative/MenuLinkConfig.php b/src/Plugin/Derivative/MenuLinkConfig.php
+index 00998f6..bbea345 100644
+--- a/src/Plugin/Derivative/MenuLinkConfig.php
++++ b/src/Plugin/Derivative/MenuLinkConfig.php
+@@ -11,6 +11,13 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
+  */
+ class MenuLinkConfig implements ContainerDeriverInterface {
+ 
++  /**
++   * The entity type manager.
++   *
++   * @var \Drupal\Core\Entity\EntityTypeManagerInterface
++   */
++  protected $entityManager;
++
+   /**
+    * Constructs a new MenuLinkConfig object.
+    */
+diff --git a/src/Plugin/Menu/Form/MenuLinkConfigForm.php b/src/Plugin/Menu/Form/MenuLinkConfigForm.php
+index 483ff3c..15aaa87 100644
+--- a/src/Plugin/Menu/Form/MenuLinkConfigForm.php
++++ b/src/Plugin/Menu/Form/MenuLinkConfigForm.php
+@@ -52,6 +52,27 @@ class MenuLinkConfigForm extends EntityForm implements MenuLinkFormInterface {
+    */
+   protected $menuParentSelector;
+ 
++  /**
++   * The access manager.
++   *
++   * @var \Drupal\Core\Access\AccessManagerInterface
++   */
++  protected $accessManager;
++
++  /**
++   * The account.
++   *
++   * @var \Drupal\Core\Session\AccountInterface
++   */
++  protected $account;
++
++  /**
++   * The alias manager.
++   *
++   * @var \Drupal\path_alias\AliasManagerInterface
++   */
++  protected $pathAliasManager;
++
+   /**
+    * Constructs a new MenuLinkConfigForm object.
+    *
+@@ -65,7 +86,7 @@ class MenuLinkConfigForm extends EntityForm implements MenuLinkFormInterface {
+    *   The access manager.
+    * @param \Drupal\Core\Session\AccountInterface $account
+    *   The account.
+-   * @param \Drupal\Core\Path\AliasManagerInterface $alias_manager
++   * @param \Drupal\path_alias\AliasManagerInterface $alias_manager
+    *   The alias manager.
+    * @param \Drupal\Core\Extension\ModuleHandlerInterface $module_handler
+    *   The module handler.

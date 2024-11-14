@@ -1,6 +1,6 @@
 services:
   php:
-    image: tugboatqa/php:8.2-apache
+    image: tugboatqa/php:8.3-apache
     default: true
     # Wait until the mysql service is done building
     depends: mysql
@@ -42,7 +42,11 @@ services:
         - find "${DOCROOT}/sites/default/files" -type f -exec chmod 0664 {} \;
 
         # Install our standard installation
-        - cp "${TUGBOAT_ROOT}/install.sh" "${DOCROOT}" && cd "${DOCROOT}" && sh -x ./install.sh
+        - drush site-install --yes
+        - drush user:password admin admin
+        - drush user:role:add administrator admin
+        - drush config-set system.site uuid 28350631-bb36-48a0-a913-6d4998c3c9db --yes
+        - drush entity-delete shortcut_set --yes
 
       # Commands that build the site. This is where you would add things
       # like feature reverts or any other drush commands required to
@@ -51,15 +55,11 @@ services:
       # and update steps, because the results of those are inherited
       # from the base preview.
       build:
-        - composer install --optimize-autoloader
-        #- drush updb --yes
-        #- drush cache:rebuild
-
-        # For now we just reinstall our standard installation
-        - cp "${TUGBOAT_ROOT}/install.sh" "${DOCROOT}" && cd "${DOCROOT}" && sh -x ./install.sh
+        - drush config-import --yes
+        - drush en dubbot_default_content --yes
 
         # Warm the caches to get a quicker first page load.
         - 'curl -H "Host: ${TUGBOAT_DEFAULT_SERVICE_URL_HOST}" http://localhost > /dev/null 2>&1'
 
   mysql:
-    image: tugboatqa/mariadb:10.4
+    image: tugboatqa/mariadb:10.6

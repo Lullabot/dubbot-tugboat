@@ -18,13 +18,19 @@
   "require": {
     "composer/installers": "^2.2",
     "cweagans/composer-patches": "^1.7.3",
-    "drupal/core-composer-scaffold": "10.2.6",
-    "drupal/core-project-message": "10.2.6",
-    "drupal/core-recommended": "10.2.6",
-    "drupal/dubbot": "1.0.x-dev",
+    "drupal/core-composer-scaffold": "^11",
+    "drupal/core-recommended": "^11",
+    "drupal/core-vendor-hardening": "^11.0",
+    "drupal/dubbot": "2.x-dev",
     "drupal/menu_link_config": "^1.0@alpha",
-    "drush/drush": "^12.5.2",
+    "drupal/tour": "^2.0",
+    "drush/drush": "^13",
+    "mglaman/composer-drupal-lenient": "^1.0",
     "phpstan/phpstan-deprecation-rules": "^1.1.4"
+  },
+  "require-dev": {
+    "drupal/core-dev": "^11",
+    "drupal/upgrade_status": "^4.3"
   },
   "conflict": {
     "drupal/drupal": "*"
@@ -33,12 +39,14 @@
   "config": {
     "allow-plugins": {
       "composer/installers": true,
-      "drupal/core-composer-scaffold": true,
-      "drupal/core-project-message": true,
-      "phpstan/extension-installer": true,
-      "dealerdirect/phpcodesniffer-composer-installer": true,
       "cweagans/composer-patches": true,
-      "php-http/discovery": true
+      "dealerdirect/phpcodesniffer-composer-installer": true,
+      "drupal/core-composer-scaffold": true,
+      "drupal/core-vendor-hardening": true,
+      "mglaman/composer-drupal-lenient": true,
+      "php-http/discovery": true,
+      "phpstan/extension-installer": true,
+      "tbachert/spi": true
     },
     "sort-packages": true
   },
@@ -82,11 +90,16 @@
         "Provide a block for running cron from a dashboard": "https://www.drupal.org/files/issues/2022-12-17/3327827-block-cron.patch"
       },
       "drupal/menu_link_config": {
-        "Fatal error after upgrading to Drupal 10.2" : "https://www.drupal.org/files/issues/2024-01-11/3410136-fatal-error-after-upgrading-11.patch"
+        "Drupal 11 update (https://dgo.to/3431957)": "patches/drupal/menu_link_config/3431957-drupal-11.patch",
+        "Fatal error after upgrading to Drupal 10.2 (https://dgo.to/3410136)" : "patches/drupal/menu_link_config/3410136-fatal-error-after-upgrading-11.patch",
+        "Dynamic property declaration (https://dgo.to/3416766)": "patches/drupal/menu_link_config/dynamic-property-declaration-3416766-2.patch"
+      },
+      "drupal/dubbot": {
+        "Permissions to limit which reports appear (https://dgo.to/3484445)": "patches/drupal/dubbot/3484445-permissions.patch"
       }
+    },
+    "drupal-lenient": {
+      "allowed-list": ["drupal/menu_link_config"]
     }
-  },
-  "require-dev": {
-    "drupal/core-dev": "^10.2.6"
   }
 }

@@ -1,0 +1,10 @@
+diff --git a/menu_link_config.info.yml b/menu_link_config.info.yml
+index 7f4fc7a47ff88fe384715fa5bcc3d7fab0d8601c..1a83b97d4780da61695f7f96c100891bc012e080 100644
+--- a/menu_link_config.info.yml
++++ b/menu_link_config.info.yml
+@@ -2,5 +2,5 @@ name: Menu Link Config
+ type: module
+ description: 'Allows to create menu links as config'
+ package: Menu
+-core_version_requirement: ^8 || ^9 || ^10
++core_version_requirement: ^8 || ^9 || ^10 || ^11

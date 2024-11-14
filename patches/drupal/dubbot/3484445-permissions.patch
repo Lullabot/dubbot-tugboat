@@ -1,0 +1,64 @@
+diff --git a/dubbot.permissions.yml b/dubbot.permissions.yml
+index 2ac4503798b52e1929e50bf65b82ddacdd64539a..f9ef8ad1e944eeecb0bc9bb2f59080a6bccae2c9 100644
+--- a/dubbot.permissions.yml
++++ b/dubbot.permissions.yml
+@@ -7,3 +7,27 @@ access dubbot report:
+   title: 'Access DubBot report'
+   description: 'Allows to access to embedded DubBot reports.'
+   restrict access: true
++
++view dubbot practices tab:
++  title: 'View Dubbot Best Practices Tab'
++  description: 'Allows user to view the Best Practices tab.'
++
++view dubbot governance tab:
++  title: 'View Dubbot Web Governance Tab'
++  description: 'Allows user to view the Web Governance tab.'
++
++view dubbot accessibility tab:
++  title: 'View Dubbot Accessibility Tab'
++  description: 'Allows user to view the Accessibility tab.'
++
++view dubbot spellcheck tab:
++  title: 'View Dubbot Spell Check Tab'
++  description: 'Allows user to view the Spell Check tab.'
++
++view dubbot seo tab:
++  title: 'View Dubbot SEO Tab'
++  description: 'Allows user to view the SEO tab.'
++
++view dubbot links tab:
++  title: 'View Dubbot Broken Links Tab'
++  description: 'Allows user to view the Broken Links tab.'
+diff --git a/src/Client.php b/src/Client.php
+index 5360e18809580b543684879c0153d03fc9d8879b..d68b6abc4eb759574b597d65faba5861f8e5b9d9 100644
+--- a/src/Client.php
++++ b/src/Client.php
+@@ -143,6 +143,27 @@ class Client implements ClientInterface {
+
+     $url = static::API_BASE_URL . UrlHelper::encodePath(strtr($path, $replacements));
+
++    // Check tab permsissions.
++    $perms = [
++      'best-practices' => 'view dubbot practices tab',
++      'web-governance' => 'view dubbot governance tab',
++      'a11y' => 'view dubbot accessibility tab',
++      'spelling' => 'view dubbot spellcheck tab',
++      'seo' => 'view dubbot seo tab',
++      'links' => 'view dubbot links tab',
++    ];
++    $tabs = [];
++
++    foreach ($perms as $tab => $perm) {
++      if (\Drupal::currentUser()->hasPermission($perm)) {
++        $tabs[] = $tab;
++      }
++    };
++
++    if (count($tabs)) {
++      $query['show'] = implode(',', $tabs);
++    }
++
+     if (empty($query)) {
+       return $url;
+     }

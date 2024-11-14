@@ -1,5 +1,5 @@
 name: 'DubBot demo: Content'
-core_version_requirement: ^9 || ^10
+core_version_requirement: ^9 || ^10 || ^11
 description: Imports the content for the DubBot demo.
 type: module
 version: VERSION
